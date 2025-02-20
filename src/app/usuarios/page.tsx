@@ -3,7 +3,7 @@
 import { UsuarioResponseDTO } from "@/dto/UsuarioResponseDTO";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Pencil, Trash2, Eye, X } from "lucide-react";
+import { Pencil, Trash2, Eye, X, PlusCircle, XCircle } from "lucide-react";
 import ReactModal from "react-modal";
 import MostrarInfoUsuario from "@/components/usuarios/MostrarInfoUsuario";
 import RegistrarUsuario from "@/components/usuarios/RegistrarUsuario";
@@ -137,7 +137,7 @@ const UsuariosPage: React.FC = () => {
         }
 
         if (nombreUsuario) {
-            usuariosFiltrados = usuariosFiltrados.filter((usuario) =>{
+            usuariosFiltrados = usuariosFiltrados.filter((usuario) => {
                 const nombreCompleto = `${usuario.nombreUsuario} ${usuario.apellidoUsuario}`;
                 return nombreCompleto.toLowerCase().includes(nombreUsuario.toLowerCase());
             });
@@ -179,6 +179,15 @@ const UsuariosPage: React.FC = () => {
         }
     }, [municipios, idMunicipioRef.current?.value]); // Se añade el valor del municipio como dependencia
 
+    const limpiarFiltros = () => {
+        if (idTipoDocumentoRef.current) idTipoDocumentoRef.current.value = "0";
+        if (nombreUsuarioRef.current) nombreUsuarioRef.current.value = "";
+        if (idEmpresaRef.current) idEmpresaRef.current.value = "0";
+        if (idRolRef.current) idRolRef.current.value = "0";
+        if (idDepartamentoRef.current) idDepartamentoRef.current.value = "0";
+        if (idMunicipioRef.current) idMunicipioRef.current.value = "0";
+        filtrarUsuarios();
+    }
 
 
     return (
@@ -186,12 +195,23 @@ const UsuariosPage: React.FC = () => {
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-5">
                 <h1 className="text-3xl font-bold text-center mb-6 text-gray-900 dark:text-gray-100">Usuarios</h1>
 
-                <div className="flex justify-end mb-4">
+                <div className="flex justify-end mb-4 gap-4">
+                    {/* Botón para agregar usuario */}
                     <button
-                        className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200"
+                        className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200"
                         onClick={() => setModalRegistrar(true)}
                     >
-                        + Agregar usuario
+                        <PlusCircle size={20} />
+                        Agregar usuario
+                    </button>
+
+                    {/* Botón para limpiar filtros */}
+                    <button
+                        className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200"
+                        onClick={limpiarFiltros}
+                    >
+                        <XCircle size={20} />
+                        Limpiar filtros
                     </button>
                 </div>
 
