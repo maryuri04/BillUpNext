@@ -29,8 +29,7 @@ export class RolDAOImpl implements RolDAO {
             );
             return roles;
         } catch (error) {
-            console.error("Error inesperado:", error);
-            return Promise.reject([]);
+            throw new Error(`Error en RolDAO.getAll: ${error}`);
         }
     }
     

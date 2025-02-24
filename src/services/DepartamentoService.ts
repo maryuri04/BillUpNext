@@ -1,9 +1,6 @@
-import { Departamento } from "../models/Departamento";
+import { DepartamentoDTO } from "@/dto/DepartamentoDTO";
 import { NextResponse } from "next/server";
 
 export interface DepartamentoService{
-    getAll(): Promise<Departamento[]>;
-    create(data: any): Promise<NextResponse>;
-    update(data: any): Promise<NextResponse>;
-    delete(idDepartamento: number): Promise<NextResponse>;
+    getAll(): Promise<DepartamentoDTO[]>;
 }

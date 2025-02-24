@@ -2,7 +2,7 @@ import { DepartamentoService } from "../DepartamentoService";
 import { Departamento } from "../../models/Departamento";
 import { NextResponse } from "next/server";
 import { DepartamentoDAOImpl } from "@/dao/impl/DepartamentoDAOImpl";
-import { plainToInstance } from "class-transformer";
+import { DepartamentoDTO } from "@/dto/DepartamentoDTO";
 
 export class DepartamentoServiceImpl implements DepartamentoService {
     private static instance: DepartamentoServiceImpl;
@@ -17,23 +17,13 @@ export class DepartamentoServiceImpl implements DepartamentoService {
         return this.instance;
     }
 
-    public getAll = async (): Promise<Departamento[]> => {
-        const departamentosDatabase = await this.departamentoDAOImpl.getAll();
-        const departamentos: Departamento[] = departamentosDatabase.map((departamentoDTO) => {
-            return (plainToInstance(Departamento, departamentoDTO));
-        });
-        return departamentos;
-    }
+    public getAll = async (): Promise<DepartamentoDTO[]> => {
+        try {
+            const departamentosDatabase = await this.departamentoDAOImpl.getAll();
+            return Promise.resolve(departamentosDatabase);
 
-    public async create(data: any): Promise<NextResponse> {
-        throw new Error("Method not implemented.");
-    }
-
-    public async update(data: any): Promise<NextResponse> {
-        throw new Error("Method not implemented.");
-    }
-
-    public async delete(idDepartamento: number): Promise<NextResponse> {
-        throw new Error("Method not implemented.");
+        } catch (error) {
+            throw new Error("Error in DepartamentoServiceImpl.getAll: " + error);
+        }
     }
 }

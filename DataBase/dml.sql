@@ -58,4 +58,4 @@ VALUES
 INSERT INTO "Usuario" ("idEmpresa", "idTipoDocumento", "idMunicipio", "idRol", "numeroDocumentoUsuario", "nombreUsuario", "apellidoUsuario", "correoUsuario", "telefonoUsuario", "direccionUsuario", "claveUsuario", "estadoUsuario")
 VALUES 
 (1,1,1,1,'1095837983','Joan','Ruiz','joan@gmail.com','3053724006','Calle 100#33A-13','1095837983',TRUE),
-(2,2,7,2,'63325117','Rosalba','Angarita','joan@gmail.com','3053724006','Calle 100#33A-13','1095837983',TRUE);
+(2,2,7,2,'63325117','Rosalba','Angarita','rosalba@gmail.com','3053724006','Calle 100#33A-13','63325117',TRUE);

@@ -24,8 +24,7 @@ export class EmpresaDAOImpl implements EmpresaDAO {
             return empresasDatabase;
        
         } catch (error) {
-            console.error("Error inesperado:", error);
-            return Promise.reject([]);
+            throw new Error(`Error en EmpresaDAO.getAll: ${error}`);
         }
 
     }

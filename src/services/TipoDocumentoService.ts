@@ -1,9 +1,5 @@
-import { NextResponse } from "next/server";
-import { TipoDocumento } from "@/models/TipoDocumento";
+import { TipoDocumentoDTO } from "@/dto/TipoDocumentoDTO";
 
 export interface TipoDocumentoService {
-    getAll(): Promise<Array<TipoDocumento>>;
-    create(data: any): Promise<NextResponse>;
-    update(data: any): Promise<NextResponse>;
-    delete(idTipoDocumento: number): Promise<NextResponse>;
+    getAll(): Promise<Array<TipoDocumentoDTO>>;
 }

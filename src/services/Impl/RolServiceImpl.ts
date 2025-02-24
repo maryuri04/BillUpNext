@@ -24,12 +24,13 @@ export class RolServiceImpl implements RolService {
         throw new Error("Method not implemented.");
     }
 
-    public getAll = async (): Promise<Rol[]> =>{
-        const rolesDatabase: RolDTO[] = await this.rolDAOImpl.getAll();
-        const roles: Rol[] = rolesDatabase.map((rolDTO) => {
-            return (plainToInstance(Rol, rolDTO));
-        });
-        return roles;
+    public getAll = async (): Promise<RolDTO[]> =>{
+        try {
+            const respuesta: RolDTO[] = await this.rolDAOImpl.getAll();
+            return respuesta;
+        } catch (error) {
+            throw new Error(`Error en RolService.getAll: ${error}`);
+        }
     }
 
     public async update(data: any): Promise<NextResponse> {

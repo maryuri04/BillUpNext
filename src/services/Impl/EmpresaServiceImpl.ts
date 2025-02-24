@@ -24,17 +24,12 @@ export class EmpresaServiceImpl implements EmpresaService {
         throw new Error("Method not implemented.");
     }
 
-    getAll = async (): Promise<Array<Empresa>> => {
+    getAll = async (): Promise<Array<EmpresaDTO>> => {
         try { 
             const respuesta: EmpresaDTO[] = await this.empresaDAOImpl.getAll();
-            const empresas: Empresa[] = respuesta.map((empresaDTO)=>{
-                return (plainToInstance(Empresa, empresaDTO));
-            })
-
-            return empresas;
+            return respuesta;
         } catch (error) {
-            console.error("Error inesperado:", error);
-            return Promise.reject([]);
+            throw new Error(`Error en EmpresaService.getAll: ${error}`);
         }
 
     }
