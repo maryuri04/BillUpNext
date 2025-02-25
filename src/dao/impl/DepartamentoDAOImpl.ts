@@ -15,13 +15,6 @@ export class DepartamentoDAOImpl implements DepartamentoDAO{
         return DepartamentoDAOImpl.instance;
     }
 
-    public create(departamento: Departamento): Promise<boolean> {
-        throw new Error("Method not implemented.");
-    }
-    public delete(idDepartamento: number): Promise<boolean> {
-        throw new Error("Method not implemented.");
-    }
-
     public getAll = async (): Promise<DepartamentoDTO[]> =>{
         try{
             const departamentos: DepartamentoDTO[] = await ejecutarQuery(
@@ -30,12 +23,7 @@ export class DepartamentoDAOImpl implements DepartamentoDAO{
             );
             return departamentos;
         } catch (error) {
-            console.error("Error inesperado:", error);
-            return Promise.reject([]);
+            throw new Error("Error in DepartamentoDAOImpl.getAll: " + error);
         }
-    }
-    
-    public update(departamento: Departamento): Promise<boolean> {
-        throw new Error("Method not implemented.");
     }
 }

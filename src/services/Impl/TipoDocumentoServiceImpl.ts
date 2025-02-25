@@ -21,24 +21,12 @@ export class TipoDocumentoServiceImpl implements TipoDocumentoService {
         return TipoDocumentoServiceImpl.instance;
     }
    
-    public getAll = async(): Promise<Array<TipoDocumento>> => {
-        const tiposDocumentoDatabase : TipoDocumentoDTO[] = await this.tipoDocumentoDAOImpl.getAll();
-        const tiposDocumento: Array<TipoDocumento> = tiposDocumentoDatabase.map((tipoDocumentoDTO) => {
-            return (plainToInstance(TipoDocumento, tipoDocumentoDTO));
-        });
-
-        return tiposDocumento;
-    }
-
-    public async create(data: any): Promise<NextResponse> {
-        throw new Error("Method not implemented.");
-    }
-
-    public async update(data: any): Promise<NextResponse> {
-        throw new Error("Method not implemented.");
-    }
-
-    public async delete(idTipoDocumento: number): Promise<NextResponse> {
-        throw new Error("Method not implemented.");
+    public getAll = async(): Promise<Array<TipoDocumentoDTO>> => {
+        try {
+            const tipoDocumentos: TipoDocumentoDTO[] = await this.tipoDocumentoDAOImpl.getAll();
+            return tipoDocumentos;
+        } catch (error) {
+            throw new Error(`Error al obtener los tipos de documento: ${error}`);
+        }
     }
 }

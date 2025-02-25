@@ -12,12 +12,7 @@ export class MunicipioDAOImpl implements MunicipioDAO {
         }
         return MunicipioDAOImpl.instance;
     }
-    public create(municipio: Municipio): Promise<boolean> {
-        throw new Error("Method not implemented.");
-    }
-    public delete(idMunicipio: number): Promise<boolean> {
-        throw new Error("Method not implemented.");
-    }
+
     public getAll = async (): Promise<MunicipioDTO[]> => {
         try{
             const municipios: MunicipioDTO[] = await ejecutarQuery(
@@ -26,11 +21,7 @@ export class MunicipioDAOImpl implements MunicipioDAO {
             );
             return municipios;
         } catch (error) {
-            console.error("Error inesperado:", error);
-            return Promise.reject([]);
+            throw new Error(`Error en MunicipioDAO.getAll: ${error}`);
         }   
-    }
-    public update(municipio: Municipio): Promise<boolean> {
-        throw new Error("Method not implemented.");
     }
 }

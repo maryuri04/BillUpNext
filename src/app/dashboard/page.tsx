@@ -15,6 +15,7 @@ const DashboardPage = () => {
 
 
     console.log(session, status)
+    
 
     return (
         <>

@@ -53,9 +53,13 @@ const UsuariosPage: React.FC = () => {
 
     const obtenerUsuarios = async () => {
         try {
-            const respuesta = await axios.get<UsuarioResponseDTO[]>("/api/usuarios")
-            setUsuarios(respuesta.data)
-            setUsuariosFiltrados(respuesta.data)
+            const respuesta= await axios.get<UsuarioResponseDTO[]>("/api/usuarios")
+            if (respuesta.status === 200) {
+                setUsuarios(respuesta.data)
+                setUsuariosFiltrados(respuesta.data)
+            } else {
+                console.error(respuesta.data)
+            }
         } catch (error) {
             console.error("Error al obtener los usuarios:", error)
         }
@@ -63,8 +67,13 @@ const UsuariosPage: React.FC = () => {
 
     const handleEliminarUsuario = async (idUsuario: number) => {
         try {
-            await axios.delete(`/api/usuarios/${idUsuario}`)
-            obtenerUsuarios()
+            const respuesta = await axios.delete(`/api/usuarios/${idUsuario}`);
+            if (respuesta.status === 200) {
+                obtenerUsuarios()
+            } else {
+                console.error(respuesta.data)
+            }
+            
         } catch (error) {
             console.error("Error al eliminar el usuario:", error)
         }
@@ -78,10 +87,34 @@ const UsuariosPage: React.FC = () => {
                     axios.get("/api/departamentos"),
                     axios.get("/api/empresas"),
                     axios.get("/api/roles"),
-                    axios.get("/api/tiposdocumento"),
+                    axios.get("/api/tipos-documento"),
                     axios.get("/api/municipios"),
                     axios.get("/api/usuarios"),
                 ])
+
+                if (departamentosRes.status !== 200) {
+                    console.error(departamentosRes.data)
+                }
+
+                if (empresasRes.status !== 200) {
+                    console.error(empresasRes.data)
+                }
+
+                if (rolesRes.status !== 200) {
+                    console.error(rolesRes.data)
+                }
+
+                if (tiposDocumentoRes.status !== 200) {
+                    console.error(tiposDocumentoRes.data)
+                }
+
+                if (municipiosRes.status !== 200) {
+                    console.error(municipiosRes.data)
+                }
+
+                if (usuariosRes.status !== 200) {
+                    console.error(usuariosRes.data)
+                }
 
                 setDepartamentos(departamentosRes.data || [])
                 setEmpresas(empresasRes.data.filter((empresa: EmpresaDTO) => empresa.estadoEmpresa === true) || [])
@@ -163,7 +196,7 @@ const UsuariosPage: React.FC = () => {
         } else {
             setMunicipiosFiltrados(municipios); // Si no hay departamento seleccionado, mostrar todos los municipios
         }
-    }, [departamentos, municipios, idDepartamentoRef.current?.value]); // Se añade como dependencia el valor actual del departamento
+    }, [departamentos, municipios, idDepartamentoRef.current?.value]); 
 
 
     useEffect(() => {
@@ -177,7 +210,7 @@ const UsuariosPage: React.FC = () => {
                 setMunicipiosFiltrados(municipios.filter((municipio) => municipio.idDepartamento === departamentoEncontrado));
             }
         }
-    }, [municipios, idMunicipioRef.current?.value]); // Se añade el valor del municipio como dependencia
+    }, [municipios, idMunicipioRef.current?.value]);
 
     const limpiarFiltros = () => {
         if (idTipoDocumentoRef.current) idTipoDocumentoRef.current.value = "0";

@@ -150,8 +150,7 @@ export class UsuarioServiceImpl implements UsuarioService {
             const respuesta = await this.usuarioDAOImpl.delete(idUsuario);
             return respuesta;
         } catch (error) {
-            console.error("Error al eliminar el usuario:", error);
-            return false;
+            throw new Error(`Error al eliminar el usuario ${error}`);
         }
     }
     
@@ -165,7 +164,7 @@ export class UsuarioServiceImpl implements UsuarioService {
             return usuariosResponseDTO;
         } catch (error) {
             console.error("Error al obtener los usuarios:", error);
-            return [];
+            throw new Error(`Error al obtener los usuarios ${error}`);
         }
     }
 

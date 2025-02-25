@@ -7,10 +7,10 @@ export const GET = async () =>{
         const usuarioService = UsuarioServiceImpl.getInstance();
         const respuesta = await usuarioService.getAll();
 
-        return NextResponse.json(respuesta, { status: 200 }); // ✅ Devuelve una respuesta válida
+        return NextResponse.json(respuesta, { status: 200 });
     } catch (error) {
         console.error("Error al obtener los usuarios:", error);
-        return NextResponse.json({ error: "Error interno del servidor" }, { status: 500 });
+        return NextResponse.json({ message: "Error al obtener los usuarios" }, { status: 500 });
     }
 }
 
@@ -18,6 +18,5 @@ export const POST = async (request: Request) =>{
     const usuarioService = UsuarioServiceImpl.getInstance();
     const respuesta =  await usuarioService.create(await request.json());
     return respuesta;
-    
 }
 

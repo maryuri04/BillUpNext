@@ -58,20 +58,24 @@ const RegistrarUsuario = ({ idUsuario, obtenerUsuarios, setModalActualizar, setM
             if (idUsuario) {
                 try {
                     const response = await axios.get(`/api/usuarios/${idUsuario}`);
-                    const usuario = response.data;
+                    if (response.status == 200) {
+                        const usuario = response.data;
 
-                    setValue("nombreUsuario", usuario.nombreUsuario || '');
-                    setValue("apellidoUsuario", usuario.apellidoUsuario || '');
-                    setValue("idTipoDocumento", usuario.idTipoDocumento || 0);
-                    setValue("numeroDocumentoUsuario", usuario.numeroDocumentoUsuario || '');
-                    setValue("idDepartamento", usuario.idDepartamento || 0);
-                    setValue("idMunicipio", usuario.idMunicipio || 0);
-                    setValue("idEmpresa", usuario.idEmpresa || 0);
-                    setValue("idRol", usuario.idRol || 0);
-                    setValue("telefonoUsuario", usuario.telefonoUsuario || '');
-                    setValue("direccionUsuario", usuario.direccionUsuario || '');
-                    setValue("correoUsuario", usuario.correoUsuario || '');
-                    setValue("estadoUsuario", usuario.estadoUsuario || false);
+                        setValue("nombreUsuario", usuario.nombreUsuario || '');
+                        setValue("apellidoUsuario", usuario.apellidoUsuario || '');
+                        setValue("idTipoDocumento", usuario.idTipoDocumento || 0);
+                        setValue("numeroDocumentoUsuario", usuario.numeroDocumentoUsuario || '');
+                        setValue("idDepartamento", usuario.idDepartamento || 0);
+                        setValue("idMunicipio", usuario.idMunicipio || 0);
+                        setValue("idEmpresa", usuario.idEmpresa || 0);
+                        setValue("idRol", usuario.idRol || 0);
+                        setValue("telefonoUsuario", usuario.telefonoUsuario || '');
+                        setValue("direccionUsuario", usuario.direccionUsuario || '');
+                        setValue("correoUsuario", usuario.correoUsuario || '');
+                        setValue("estadoUsuario", usuario.estadoUsuario || false);
+                    } else {
+                        console.error("Error al obtener datos del usuario:", response.data.message);
+                    }
                 } catch (error) {
                     console.error("Error al obtener datos del usuario:", error);
                 }
@@ -85,7 +89,9 @@ const RegistrarUsuario = ({ idUsuario, obtenerUsuarios, setModalActualizar, setM
         try {
             if (idUsuario) {
                 let { idDepartamento, ...datosModificados } = data;
+
                 datosModificados = { ...data, idTipoDocumento: parseInt(data.idTipoDocumento.toString()), idMunicipio: parseInt(data.idMunicipio.toString()), idEmpresa: parseInt(data.idEmpresa.toString()), idRol: parseInt(data.idRol.toString()), estadoUsuario: true, claveUsuario: watch('numeroDocumentoUsuario') };
+                
                 const respuesta = await axios.put(`/api/usuarios/${idUsuario}`, datosModificados);
                 setError(null);
                 setSuccess(respuesta.data.message);
