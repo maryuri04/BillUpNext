@@ -10,6 +10,9 @@ class Database{
         if (!Database.instance) {
             const { USER, HOST, DATABASE, PASSWORD, PORTPOSTGRES } = process.env;// Obtener las variables de entorno
 
+           
+
+
             // Validar que las variables de entorno necesarias estén definidas
             if (!USER || !HOST || !DATABASE || !PASSWORD || !PORTPOSTGRES) {
                 throw new Error('Faltan variables de entorno para la conexión con la base de datos.');
