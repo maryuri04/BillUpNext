@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
-import { Empresa } from "@/models/Empresa";
-import { EmpresaDTO } from "@/dto/EmpresaDTO";
+import { EmpresaResponseDTO } from "@/dto/EmpresaResponseDTO";
+import { EmpresaRequestDTO } from "@/dto/EmpresaRequestDTO";
 
 export interface EmpresaService {
-    getAll(): Promise<Array<EmpresaDTO>>;
-    create(data: any): Promise<NextResponse>;
-    update(data: any): Promise<NextResponse>;
-    delete(idEmpresa: number): Promise<NextResponse>;
+    getAll(): Promise<Array<EmpresaResponseDTO>>;
+    create(empresa: EmpresaRequestDTO): Promise<NextResponse>;
+    update(empresa: EmpresaRequestDTO): Promise<NextResponse>;
+    delete(idEmpresa: number): Promise<boolean>;
+    getById(idEmpresa: number): Promise<EmpresaResponseDTO | null>;
 }

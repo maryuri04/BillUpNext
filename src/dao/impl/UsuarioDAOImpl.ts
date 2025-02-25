@@ -41,8 +41,7 @@ export class UsuarioDAOImpl implements UsuarioDAO {
             return respuesta.length > 0 ? respuesta[0].resultado : false; // Si la respuesta está vacía, se retorna false
         }
         catch (error) {
-            console.error("Error inesperado:", error);
-            return false;
+            throw new Error(`Error en UsuarioDAO.create: ${error}`);
         }
     }
 
@@ -71,8 +70,7 @@ export class UsuarioDAOImpl implements UsuarioDAO {
             return respuesta.length > 0 ? respuesta[0].resultado : false; // Si la respuesta está vacía, se retorna false
         }
         catch (error) {
-            console.error("Error inesperado:", error);
-            return false;
+            throw new Error(`Error en UsuarioDAO.update: ${error}`);
         }
     }
 
@@ -85,8 +83,7 @@ export class UsuarioDAOImpl implements UsuarioDAO {
             );
             return respuesta.length > 0 ? respuesta[0].resultado : false;
         } catch (error) {
-            console.error("Error inesperado:", error);
-            return false;
+            throw new Error(`Error en UsuarioDAO.delete: ${error}`);
         }
     }
 
@@ -104,8 +101,7 @@ export class UsuarioDAOImpl implements UsuarioDAO {
 
             return respuesta;
         } catch (error) {
-            console.error("Error inesperado:", error);
-            return [];
+            throw new Error(`Error en UsuarioDAO.getAll: ${error}`);
         }
     }
 
@@ -126,8 +122,7 @@ export class UsuarioDAOImpl implements UsuarioDAO {
             return respuesta.length > 0 ? respuesta[0] : null;
 
         } catch (error) {
-            console.error("Error inesperado:", error);
-            return null;
+            throw new Error(`Error en UsuarioDAO.getByIdUser: ${error}`);
         }
 
     }
@@ -137,8 +132,7 @@ export class UsuarioDAOImpl implements UsuarioDAO {
             const respuesta = await ejecutarQuery(`SELECT validarExisteUsuarioDoc ($1) as resultado;`, [numeroDocumentoUsuario]);
             return respuesta.length > 0 ? respuesta[0].resultado : false;
         } catch (error) {
-            console.error("Error inesperado:", error);
-            return false;
+            throw new Error(`Error en UsuarioDAO.existUsuarioDoc: ${error}`);
         }
     }
 
@@ -147,8 +141,7 @@ export class UsuarioDAOImpl implements UsuarioDAO {
             const respuesta = await ejecutarQuery(`SELECT validarExisteUsuarioCorreo ($1) as resultado;`, [correoUsuario]);
             return respuesta.length > 0 ? respuesta[0].resultado : false;
         } catch (error) {
-            console.error("Error inesperado:", error);
-            return false;
+            throw new Error(`Error en UsuarioDAO.existUsuarioCorreo: ${error}`);
         }
     }
 
@@ -157,8 +150,7 @@ export class UsuarioDAOImpl implements UsuarioDAO {
             const respuesta = await ejecutarQuery(`SELECT validarExisteUsuarioTelefono ($1) as resultado;`, [telefonoUsuario]);
             return respuesta.length > 0 ? respuesta[0].resultado : false;
         } catch (error) {
-            console.error("Error inesperado:", error);
-            return false;
+            throw new Error(`Error en UsuarioDAO.existUsuarioTelefono: ${error}`);
         }
     }
 
@@ -171,8 +163,7 @@ export class UsuarioDAOImpl implements UsuarioDAO {
 
             return respuesta.length > 0 ? respuesta[0] : null;
         } catch (error) {
-            console.error("Error inesperado:", error);
-            return null;
+            throw new Error(`Error en UsuarioDAO.getClaveAutenticacion: ${error}`);
         }
     }
 

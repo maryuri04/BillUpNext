@@ -13,6 +13,16 @@ const isValidDocument = (document: string): boolean => {
   return regex.test(document);
 }
 
+const isValidNit = (nit: string): boolean => {
+  const regex = /^\d{9}$/;
+  return regex.test(nit);
+}
+
+const isValidDigitoVerificacion = (nit: string): boolean => {
+  const regex = /^\d{9}$/;
+  return regex.test(nit);
+}
+
 const isValidPassword = (password: string): boolean => {
   const minLength = 8;
 
@@ -39,4 +49,4 @@ const isValidPassword = (password: string): boolean => {
   return hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar && hasNoSpaces;
 };
 
-export { isValidEmail, isValidPhoneNumber, isValidDocument, isValidPassword };
+export { isValidEmail, isValidPhoneNumber, isValidDocument, isValidPassword, isValidNit, isValidDigitoVerificacion };
