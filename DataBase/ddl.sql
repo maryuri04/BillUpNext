@@ -121,9 +121,8 @@ CREATE TABLE IF NOT EXISTS "Empresa" (
     "razonSocialEmpresa" varchar(250) not null,
     "direccionEmpresa" varchar(250) not null,
     "codigoPostalEmpresa" varchar(10) not null,
-    "telefonoEmpresa" varchar(15) not null,
-    "correoEmpresa" varchar(250) not null,
-    "logoEmpresa" varchar(150) not null,
+    "telefonoEmpresa" varchar(15) not null unique,
+    "correoEmpresa" varchar(250) not null unique,
     "estadoEmpresa" boolean not null,
     primary key ("idEmpresa"),
     foreign key ("idTipoPersona") references "TipoPersona" ("idTipoPersona"),
@@ -228,23 +227,15 @@ CREATE TABLE IF NOT EXISTS "Venta" (
     "idCaja" int not null,
     "idUsuario" int not null,
     "idUbicacionVenta" int not null,
+    "idTipoMedioPago" int not null,
     "fechaVenta" TIMESTAMP not null,
     "observacionVenta" varchar(250) not null,
+    "valorTotalVenta" double precision not null,
     primary key ("idVenta"),
     foreign key ("idTercero") references "Tercero" ("idTercero"),
     foreign key ("idCaja") references "Caja" ("idCaja"),
     foreign key ("idUsuario") references "Usuario" ("idUsuario"),
-    foreign key ("idUbicacionVenta") references "UbicacionVenta" ("idUbicacionVenta")
-);
-
-CREATE TABLE IF NOT EXISTS "MedioPago" (
-    "idMedioPago" serial,
-    "idVenta" int not null,
-    "idTipoMedioPago" int not null,
-    "valorTotalMedioPago" double precision not null,
-    "estadoMedioPago" boolean not null,
-    primary key ("idMedioPago"),
-    foreign key ("idVenta") references "Venta" ("idVenta"),
+    foreign key ("idUbicacionVenta") references "UbicacionVenta" ("idUbicacionVenta"),
     foreign key ("idTipoMedioPago") references "TipoMedioPago" ("idTipoMedioPago")
 );
 
@@ -252,7 +243,6 @@ CREATE TABLE IF NOT EXISTS "Producto" (
     "idProducto" serial,
     "idEmpresa" int not null,
     "idCategoria" int not null,
-    "codigoBarrasProducto" varchar(50) not null,
     "nombreProducto" varchar(50) not null,
     "descripcionProducto" varchar(250) not null,
     "precioVentaProducto" double precision not null,

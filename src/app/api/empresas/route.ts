@@ -11,3 +11,9 @@ export const GET = async () => {
         return NextResponse.json({ message: "Error al obtener las empresas" }, { status: 500 });
     }
 }
+
+export const POST = async (request: Request) => {
+    const empresaService = EmpresaServiceImpl.getInstance();
+    const respuesta = await empresaService.create(await request.json());
+    return respuesta;
+}

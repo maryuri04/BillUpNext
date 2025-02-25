@@ -1,4 +1,4 @@
-export interface EmpresaDTO {
+export interface EmpresaResponseDTO {
     idEmpresa: number,
     idTipoPersona: number,
     idRegimenContribuyente: number,

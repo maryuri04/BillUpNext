@@ -5,7 +5,7 @@ import { DepartamentoDTO } from "@/dto/DepartamentoDTO";
 import { MunicipioDTO } from "@/dto/MunicipioDTO";
 import { TipoDocumentoDTO } from "@/dto/TipoDocumentoDTO";
 import { RolDTO } from "@/dto/RolDTO";
-import { EmpresaDTO } from "@/dto/EmpresaDTO";
+import { EmpresaDTO } from "@/dto/EmpresaRequestDTO";
 import { UsuarioRequestDTO } from "@/dto/UsuarioRequestDTO";
 import { UsuarioResponseDTO } from "@/dto/UsuarioResponseDTO";
 

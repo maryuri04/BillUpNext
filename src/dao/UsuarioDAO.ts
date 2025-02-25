@@ -2,8 +2,8 @@ import { UsuarioAutenticacionDTO } from "@/dto/UsuarioAutenticacionDTO";
 import { UsuarioRequestDTO } from "@/dto/UsuarioRequestDTO";
 import { UsuarioResponseDTO } from "@/dto/UsuarioResponseDTO";
 
-export interface UsuarioDAO{
-    create (usuario: UsuarioRequestDTO): Promise<boolean>;
+export interface UsuarioDAO {
+    create(usuario: UsuarioRequestDTO): Promise<boolean>;
     update(usuario: UsuarioRequestDTO): Promise<boolean>;
     delete(idUsuario: number): Promise<boolean>;
     getAll(): Promise<Array<UsuarioResponseDTO>>;

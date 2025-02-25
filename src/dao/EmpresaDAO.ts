@@ -1,9 +1,13 @@
-import { Empresa } from "@/models/Empresa";
-import { EmpresaDTO } from "@/dto/EmpresaDTO";
+import { EmpresaResponseDTO } from "@/dto/EmpresaResponseDTO";
+import { EmpresaRequestDTO } from "@/dto/EmpresaRequestDTO";
 
 export interface EmpresaDAO{
-    getAll(): Promise<Array<EmpresaDTO>>;
-    create(empresa: Empresa): Promise<boolean>;
-    update(empresa: Empresa): Promise<boolean>;
+    getAll(): Promise<Array<EmpresaResponseDTO>>;
+    getById(idEmpresa: number): Promise<EmpresaResponseDTO | null>;
+    create(empresa: EmpresaRequestDTO): Promise<boolean>;
+    update(empresa: EmpresaRequestDTO): Promise<boolean>;
     delete(idEmpresa: number): Promise<boolean>;
+    existEmpresaNit(nitEmpresa: string): Promise<boolean>;
+    existEmpresaCorreo(correoEmpresa: string): Promise<boolean>;
+    existEmpresaTelefono(telefonoEmpresa: string): Promise<boolean>;
 }
