@@ -322,3 +322,4 @@ CREATE TABLE IF NOT EXISTS "Historial" (
     "fecha" TIMESTAMP,
     primary key ("idHistorial")
 );
+
